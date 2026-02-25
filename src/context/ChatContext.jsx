@@ -6,13 +6,14 @@ const ChatContext = createContext()
 const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState(mockUsers)
   const [selectedUserId, setSelectedUserId] = useState(null)
-  const [loggedUser, setLoggedUser] = useState(JSON.parse(localStorage.getItem("user")) || null)
+const [loggedUser, setLoggedUser] = useState(
+  JSON.parse(localStorage.getItem("user")) || null
+)
 
   const handleUser = (user) => {
-    setLoggedUser(user)
-    localStorage.setItem("user", JSON.stringify(user))
-  }
-
+  setLoggedUser(user)
+  localStorage.setItem("user", JSON.stringify(user))
+}
   const handleSelectedUserId = (id) => {
     setSelectedUserId(id)
   }
@@ -34,11 +35,10 @@ const login = (userData) => {
 
   return null
 }
-
-  const logout = () => {
-    localStorage.removeItem("user")
-  }
-
+const logout = () => {
+  localStorage.removeItem("user")
+  setLoggedUser(null)
+}
   const handleMessages = (newMessage) => {
     setUsers((prevValue) => prevValue.map((user) =>
       user.id === selectedUserId
