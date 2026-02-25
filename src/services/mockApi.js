@@ -13,19 +13,6 @@ const users = [
     ]
   },
   {
-    id: 2,
-    firstName: "Michael",
-    lastName: "Williams",
-    email: "michael.williams@gmail.com",
-    password: "pepe123",
-    address: { country: "Germany" },
-    image: "https://i.pinimg.com/736x/c7/d7/0f/c7d70fd2978561a7513299d17cb1eae8.jpg",
-    messages: [
-      { author: "Michael", text: "Server deployed", time: "10:01" },
-      { author: "me", text: "Ok, checking", time: "10:05" }
-    ]
-  },
-  {
     id: 3,
     firstName: "Sophia",
     lastName: "Brown",
