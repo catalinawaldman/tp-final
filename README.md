@@ -1,16 +1,31 @@
-# React + Vite
+# Chat UTN 💬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación de chat desarrollada en **React** con un diseño **coquette etéreo**, pensada para practicar UI/UX, manejo de estado y estilos responsivos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## React Compiler
+- **Login personalizado** con validación y mensajes de error.
+- **Lista de contactos** con foto, nombre y país.
+- **Chat en tiempo real** con mensajes alineados:
+  - Mensajes propios → a la derecha.
+  - Mensajes recibidos → a la izquierda.
+- **Encabezados alineados** (Chat UTN y nombre del contacto).
+- **Estilos coquette** con tipografías elegantes y paleta rosa.
+- **Responsive design**:
+  - En pantallas grandes: aside + chat.
+  - En pantallas medianas: aside arriba, chat abajo.
+  - En móviles (≤480px): aside oculto, chat ocupa toda la pantalla.
+- **Scroll controlado**:
+  - Solo vertical en aside y chat-body.
+  - Sin scroll horizontal.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tecnologías utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React** (componentes funcionales, hooks, context API).
+- **React Router** (navegación entre login, chat y not found).
+- **CSS puro** con variables, flexbox y grid.
+- **Google Fonts**: *Playfair Display* y *Quicksand*.
