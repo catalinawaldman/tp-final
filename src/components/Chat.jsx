@@ -1,8 +1,14 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
+import { ChatContext } from "../context/ChatContext.jsx"
+import { useNavigate } from "react-router-dom"
 
-const Chat = ({ activeUser }) => {
+const Chat = () => {
   const [text, setText] = useState("")
   const chatBodyRef = useRef(null)
+
+  const { selectedUser, logout, handleMessages, loggedUser } = useContext(ChatContext)
+
+  const navigate = useNavigate()
 
   const handleChangeText = (event) => {
     setText(event.target.value)
@@ -15,31 +21,36 @@ const Chat = ({ activeUser }) => {
   }
 
   const sendMessage = () => {
-    if (text.trim() === "") return
+    if (text.length === 0) {
+      return
+    }
 
     const currentTime = new Date()
     const newMessage = {
-      author: "me",
-      time: `${currentTime.getHours()}:${currentTime.getMinutes()}`,
+      author: loggedUser.firstName, // usa el nombre del usuario logueado
+      time: currentTime.getHours() + ":" + currentTime.getMinutes(),
       text: text
     }
 
-    // agregamos el mensaje al usuario activo
-    activeUser.messages.push(newMessage)
-
+    handleMessages(newMessage)
     setText("")
+  }
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
   }
 
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight
     }
-  }, [activeUser])
+  }, [selectedUser?.messages])
 
-  if (!activeUser) {
+  if (!selectedUser) {
     return (
       <section className="chat-cont-empty">
-        <p>Selecciona un contacto para empezar a conversar</p>
+        <p className="chat-empty">Selecciona un contacto para empezar a conversar</p>
       </section>
     )
   }
@@ -47,28 +58,30 @@ const Chat = ({ activeUser }) => {
   return (
     <section className="chat">
       <header>
-        <h2>{activeUser.firstName} {activeUser.lastName}</h2>
-        <p>{activeUser.address.country}</p>
+        <div>
+          <h2>{selectedUser.firstName} {selectedUser.lastName}</h2>
+          <p>{selectedUser.address.country}</p>
+        </div>
+        <button onClick={handleLogout}>Cerrar sesión</button>
       </header>
-
       <div className="chat-body" ref={chatBodyRef}>
-        {activeUser.messages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${
-              message.author === "me" ? "me" : "received"
-            }`}
-          >
-            <p><b>{message.author}</b>: {message.text}</p>
-            <p className="timestamp">{message.time}</p>
-          </div>
-        ))}
+        {selectedUser.messages.map((message, index) => {
+          // condición: si el autor es "me" (mockApi) o coincide con el usuario logueado → va a la derecha
+          const isMine = message.author === "me" || message.author === loggedUser?.firstName
+          return (
+            <div
+              key={index}
+              className={`message ${isMine ? "me" : "received"}`}
+            >
+              <p>{message.text}</p>
+              <p className="timestamp">{message.time}</p>
+            </div>
+          )
+        })}
       </div>
-
       <div className="chat-input">
         <input
           type="text"
-          name="message"
           placeholder="Escribe un mensaje..."
           onChange={handleChangeText}
           onKeyDown={handleKeyDown}

@@ -1,9 +1,11 @@
-import { useState } from "react"
-import { users } from "../services/mockApi.js"
+import { useContext, useEffect, useState } from "react"
+import { ChatContext } from "../context/ChatContext"
+// import { users } from "../services/mockApi.js"
 
-const Aside = ({ onActiveUser }) => {
+const Aside = () => {
   const [search, setSearch] = useState("")
 
+  const { users, handleSelectedUserId } = useContext(ChatContext)
 
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -15,7 +17,7 @@ const Aside = ({ onActiveUser }) => {
   })
 
   const handleClick = (id) => {
-    onActiveUser(id)
+    handleSelectedUserId(id)
   }
 
   return (
