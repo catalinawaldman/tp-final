@@ -36,7 +36,7 @@ const login = (userData) => {
   return null
 }
 const logout = () => {
-  localStorage.removeItem("user")
+setLoggedUser(null)
   setLoggedUser(null)
 }
   const handleMessages = (newMessage) => {
