@@ -1,15 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { ChatProvider } from './context/ChatContext'
-import { RouterApp } from './router/RouterApp'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ChatProvider } from "./context/ChatContext";
+import { RouterApp } from "./router/RouterApp";
+import "./styles/main.css";
 
-// main styles
-import "./styles/main.css"
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <ChatProvider>
       <RouterApp />
     </ChatProvider>
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
